@@ -24,9 +24,9 @@ class Knight:
             if key == "hp":
                 self.hp += value
             elif key == "power":
-                self.power = value
+                self.power += value
             elif key == "protection":
-                self.protection = value
+                self.protection += value
 
     def take_damage(self, damage: int) -> None:
         self.hp -= damage
