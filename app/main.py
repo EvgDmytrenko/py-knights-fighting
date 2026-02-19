@@ -3,34 +3,28 @@ from app.config import KNIGHTS
 
 
 def run_duel(attacker: Knight, defender: Knight) -> None:
-    #  Розрахунок шкоди
+
     damage_to_attacker = attacker.calculate_damage_from(defender)
     damage_to_defender = defender.calculate_damage_from(attacker)
 
-    # Отримання шкоди
     attacker.take_damage(damage_to_attacker)
     defender.take_damage(damage_to_defender)
 
 
 def battle(knights_config: dict) -> dict:
-    # 1. Інстанціювання екземплярів класів
-    lancelot = Knight(knights_config["lancelot"])
-    arthur = Knight(knights_config["arthur"])
-    mordred = Knight(knights_config["mordred"])
-    red_knight = Knight(knights_config["red_knight"])
 
-    # 2. Битви
-    # Мордред проти Ланселота
-    run_duel(lancelot, mordred)
+    knights = []
+    for name, knight in knights_config.items():
+        knights.append(Knight(knight))
 
-    # Артур проти Червоного Лицаря
-    run_duel(arthur, red_knight)
+    run_duel(knights[0], knights[2])
+    run_duel(knights[1], knights[3])
 
     return {
-        lancelot.name: lancelot.hp,
-        arthur.name: arthur.hp,
-        mordred.name: mordred.hp,
-        red_knight.name: red_knight.hp
+        knights[0].name: knights[0].hp,
+        knights[1].name: knights[1].hp,
+        knights[2].name: knights[2].hp,
+        knights[3].name: knights[3].hp,
     }
 
 

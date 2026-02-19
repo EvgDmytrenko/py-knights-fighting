@@ -5,13 +5,10 @@ class Knight:
         self.hp = knight_config["hp"]
         self.protection = 0
 
-        # 1. Apply Armour logic
         self._wear_armour(knight_config["armour"])
 
-        # 2. Apply Weapon logic
         self._take_weapon(knight_config["weapon"])
 
-        # 3. Apply Potion logic
         if knight_config["potion"]:
             self._drink_potion(knight_config["potion"])
 
@@ -23,10 +20,13 @@ class Knight:
         self.power += weapon["power"]
 
     def _drink_potion(self, potion: dict) -> None:
-        effect = potion["effect"]
-        self.hp += effect.get("hp", 0)
-        self.power += effect.get("power", 0)
-        self.protection += effect.get("protection", 0)
+        for key, value in potion["effect"].items():
+            if key == "hp":
+                self.hp += value
+            elif key == "power":
+                self.power = value
+            elif key == "protection":
+                self.protection = value
 
     def take_damage(self, damage: int) -> None:
         self.hp -= damage

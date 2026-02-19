@@ -1,5 +1,4 @@
 KNIGHTS = {
-    """Comment"""
     "lancelot": {
         "name": "Lancelot",
         "power": 35,
